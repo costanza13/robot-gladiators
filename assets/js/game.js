@@ -78,7 +78,6 @@ var startGame = function() {
   playerInfo.reset();
 
   for (var i = 0; i < enemyInfo.length; i++) {
-    // debugger;
     if (playerInfo.health > 0) {
       // let the player know what round they're in (add 1 to loop counter)
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
@@ -146,7 +145,7 @@ var shop = function() {
   switch (shopOptionPrompt) {
     case "refill":
     case "REFILL":
-      playerInfo.refillHealth());
+      playerInfo.refillHealth();
       break;
     case "UPGRADE":
     case "upgrade":
