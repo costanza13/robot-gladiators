@@ -25,8 +25,8 @@ var fightOrSkip = function() {
     // if yes (true), leave fight
     if (confirmSkip) {
       window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-      // subtract money from playerMoney for skipping
-      playerInfo.playerMoney = playerInfo.money - 10;
+      // subtract money from playerInfo.money for skipping
+      playerInfo.money = playerInfo.money - 10;
       
       // return true if player wants to leave
       return true;
@@ -34,11 +34,6 @@ var fightOrSkip = function() {
   }
 
   return false;
-}
-
-
-var playerTurn = function() {
-
 }
 
 
@@ -187,6 +182,28 @@ var endGame = function() {
   }
   else {
     window.alert("You have lost your robot in battle!");
+  }
+
+  // fetch the current high score info
+  var currentHighScore = window.localStorage.getItem("rgHighScore");
+  var currentHighScoreHolder = '<nobody>';
+  // if there no current high score, set it to -1
+  if (typeof(currentHighScore) == 'undefined') {
+    currentHighScore = -1;
+  }
+  // otherwise, fetch the high score holder's name
+  else {
+    currentHighScoreHolder = window.localStorage.getItem("rgHighScoreName");
+  }
+  
+  // if the player's score is higher than the current high score, set the new high score info
+  if (playerInfo.money > currentHighScore) {
+    window.localStorage.setItem("rgHighScore", playerInfo.money);
+    window.localStorage.setItem("rgHighScoreName", playerInfo.name);
+    window.alert("Congratulations! You set a new HIGH SCORE!");
+  }
+  else {
+    window.alert(playerInfo.name + "'s score of " + playerInfo.money + " did not beat " + currentHighScoreHolder + "'s high score of " + currentHighScore);
   }
 
   // ask player if they'd like to play again
