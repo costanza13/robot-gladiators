@@ -90,6 +90,35 @@ var fight = function(enemy) {
 };
 
 
+var shop = function() {
+  // ask player what they'd like to do
+  var shopOptionPrompt = window.prompt(
+    "would you like to REFILL your health, UPGRADE your attack, or LEAVE the store?  Please enter one: 1 for REFILL, 2 for UPGRADE or 3 for LEAVE."
+  );
+  shopOptionPrompt = parseInt(shopOptionPrompt);
+
+  // use switch to carry out action
+  switch (shopOptionPrompt) {
+    case 1:
+      playerInfo.refillHealth();
+      break;
+    case 2:
+      playerInfo.upgradeAttack();
+      break;
+    case 3:
+      window.alert("Leaving the store.");
+      // do nothing, so function will end
+      break;
+    default:
+      window.alert("You did not pick a valid option. Try again.");
+
+      // call shop() again to force player to pick a valid option
+      shop();
+      break;
+  }
+};
+
+
 var startGame = function() {
   // reset player stats
   playerInfo.reset();
@@ -98,7 +127,6 @@ var startGame = function() {
     if (playerInfo.health > 0) {
       // let the player know what round they're in (add 1 to loop counter)
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-      debugger;
   
       // pick a new enemy to fight based on the index of the enemyNames array
       var pickedEnemyObj = enemyInfo[i];
@@ -153,38 +181,6 @@ var endGame = function() {
 };
 
 
-var shop = function() {
-  // ask player what they'd like to do
-  var shopOptionPrompt = window.prompt(
-    "would you like to REFILL your health, UPGRADE your attack, or LEAVE the store?  Please enter one: 'REFILL', 'UPGRADE' or 'LEAVE' to make a choice."
-  );
-
-  // use switch to carry out action
-  switch (shopOptionPrompt) {
-    case "refill":
-    case "REFILL":
-      playerInfo.refillHealth();
-      break;
-    case "UPGRADE":
-    case "upgrade":
-      playerInfo.upgradeAttack();
-      break;
-    case "leave":
-    case "LEAVE":
-        window.alert("Leaving the store.");
-
-      // do nothing, so function will end
-      break;
-    default:
-      window.alert("You did not pick a valid option. Try again.");
-
-      // call shop() again to force player to pick a valid option
-      shop();
-      break;
-  }
-};
-
-
 // function to set name
 var getPlayerName = function() {
   var name = "";
@@ -196,7 +192,6 @@ var getPlayerName = function() {
   console.log("Your robot's name is " + name);
   return name;
 };
-
 
 // initialize variables and start the game on page load
 var playerInfo = {
@@ -243,6 +238,8 @@ var enemyInfo = [
     attack: randomNumber(10, 14)
   }
 ];
+
+debugger;
 
 startGame();
 
